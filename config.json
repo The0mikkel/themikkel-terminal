@@ -1,0 +1,27 @@
+{
+  "readmeUrl": "https://raw.githubusercontent.com/cveinnt/cveinnt/master/README.md",
+  "title": "The Mikkel Terminal",
+  "name": "Mikkel Albrechtsen",
+  "ascii": "Themikkel Terminal",
+  "social": {
+    "github": "The0mikkel",
+    "linkedin": "themikkel",
+    "website": "themikkel.dk"
+  },
+  "email": "contact@email.com",
+  "ps1_hostname": "terminal.themikkel.dk",
+  "ps1_username": "visitor",
+  "repo": "https://github.com/The0mikkel/themikkel-terminal",
+  "resume_url": "https://themikkel.dk/cv",
+  "colors": {
+    "dark": {
+      "background": "#051736",
+      "foreground": "#E5E9F0",
+      "yellow": "#3D7AEA",
+      "green": "#ffbd2a",
+      "gray": "#88C0D0",
+      "blue": "#EBCB8B",
+      "red": "#BF616A"
+    }
+  }
+}
