@@ -72,7 +72,7 @@ export default abstract class File {
    *
    * @returns returns the content of the File.
    */
-  read(): string {
+  async read(): Promise<string> {
     return this.content;
   }
 
@@ -82,7 +82,7 @@ export default abstract class File {
    * @param params The parameters to execute the executable with.
    * @returns The result of the execution.
    */
-  execute(params: {}): any {
+  async execute(params: {}): Promise<any> {
     return;
   }
 

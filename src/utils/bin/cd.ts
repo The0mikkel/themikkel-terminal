@@ -20,7 +20,22 @@ export const cd = async (args: string[]): Promise<string> => {
   }
 };
 
+/**
+ * Get a directory from a path
+ * 
+ * @param inputPath The path to get the directory from
+ * @returns The directory (File class) or undefined if it doesn't exist
+ */
 export const getDirFromPath = async (
+  inputPath: string,
+): Promise<File | undefined> => {
+  let output = await getFileFromPath(inputPath);
+
+  return output?.isDirectory() ? output : undefined;
+};
+
+
+export const getFileFromPath = async (
   inputPath: string,
 ): Promise<File | undefined> => {
   let originalPath = inputPath;
@@ -61,15 +76,13 @@ export const getDirFromPath = async (
       continue;
     }
     if (path[i] === '..') {
-      let parent = changeTo.getParent();
-      changeTo = parent?.isDirectory() ? parent : undefined;
+      changeTo = changeTo.getParent();
       if (changeTo === undefined) {
         return undefined;
       }
       continue;
     }
-    let child = changeTo.getChild(path[i]);
-    changeTo = child?.isDirectory() ? child : undefined;
+    changeTo = changeTo.getChild(path[i]);
     if (changeTo === undefined) {
       return undefined;
     }
