@@ -2,6 +2,10 @@ import File from '../structure/File';
 import State from '../structure/State';
 import { getDirFromPath } from './cd';
 
+export const ll = async (args: string[]): Promise<string> => {
+  return await ls(['-l', ...args]);
+};
+
 export const ls = async (args: string[]): Promise<string> => {
   let paths = [];
   let flags = [];
@@ -76,9 +80,9 @@ export const generateLongListPrint = async (paths: File[]): Promise<string> => {
   for (let index = 0; index < paths.length; index++) {
     let current = paths[index];
 
-    let childList = '<table>';
-
     let children = current.getChildren();
+
+    let childList = `total ${children.length}\n<table>`;
     children.forEach((child) => {
       let metadata = child.metadata;
       let owner = child.owner?.username ?? '0';
