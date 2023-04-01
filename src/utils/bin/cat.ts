@@ -3,7 +3,7 @@ import { getFileFromPath } from './cd';
 
 export const cat = async (args: string[]): Promise<string> => {
   let output = '';
-  let cats: File[] | undefined[] = [];
+  let cats: File[] = [];
   for (let index = 0; index < args.length; index++) {
     let catPath = args[index].trim();
     if (args[index].trim().length === 0) {
