@@ -15,6 +15,8 @@ export const cd = async (args: string[]): Promise<string> => {
   if (changeTo instanceof File) {
     State.instance.dir = changeTo;
     return '';
+  } else if (changeTo === false) {
+    return `cd: ${originalPath}: Permission denied`;
   } else {
     return `${originalPath}: No such file or directory`;
   }
@@ -22,22 +24,31 @@ export const cd = async (args: string[]): Promise<string> => {
 
 /**
  * Get a directory from a path
- * 
+ *
  * @param inputPath The path to get the directory from
- * @returns The directory (File class) or undefined if it doesn't exist
+ * @returns The directory (File class) or undefined if it doesn't exist. Returns false if the path is invalid (e.g. user is not allowed to access it)
  */
 export const getDirFromPath = async (
   inputPath: string,
-): Promise<File | undefined> => {
+): Promise<File | undefined | false> => {
   let output = await getFileFromPath(inputPath);
+
+  if (output === false) {
+    return false;
+  }
 
   return output?.isDirectory() ? output : undefined;
 };
 
-
+/**
+ * Get a file or directory from a path
+ *
+ * @param inputPath The path to get the file or directory from
+ * @returns The file or directory (File class) or undefined if it doesn't exist. Returns false if the path is invalid (e.g. user is not allowed to access it)
+ */
 export const getFileFromPath = async (
   inputPath: string,
-): Promise<File | undefined> => {
+): Promise<File | undefined | false> => {
   let originalPath = inputPath;
   let startRoot = false;
   let startUser = false;
@@ -80,11 +91,23 @@ export const getFileFromPath = async (
       if (changeTo === undefined) {
         return undefined;
       }
+      if (
+        changeTo.owner !== undefined &&
+        changeTo.owner !== State.instance.user
+      ) {
+        return false;
+      }
       continue;
     }
     changeTo = changeTo.getChild(path[i]);
     if (changeTo === undefined) {
       return undefined;
+    }
+    if (
+      changeTo.owner !== undefined &&
+      changeTo.owner !== State.instance.user
+    ) {
+      return false;
     }
   }
 
