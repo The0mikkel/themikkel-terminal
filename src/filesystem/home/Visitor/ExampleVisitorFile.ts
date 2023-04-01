@@ -5,7 +5,7 @@ export default class ExampleVisitorFile extends File {
   public static readonly instance = new ExampleVisitorFile();
 
   public name: string = 'exampleVisitorFile';
-  public metadata = '-rw-';
+  public metadata = '-r--';
   public owner = VisitorUser.instance;
 
   protected content = 'This is an example visitor file.';

@@ -6,7 +6,7 @@ export default class Visitor extends File {
   public static readonly instance = new Visitor();
 
   public name: string = 'visitor';
-  public metadata = 'drw-';
+  public metadata = 'dr--';
   public owner = VisitorUser.instance;
 
   public constructor() {

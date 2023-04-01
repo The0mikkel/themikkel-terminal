@@ -6,7 +6,7 @@ export default class Home extends File {
   public static readonly instance = new Home();
 
   public name = 'home';
-  public metadata = 'drw-';
+  public metadata = 'dr--';
   public owner = undefined;
 
   public constructor() {

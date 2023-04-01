@@ -6,7 +6,7 @@ export default class Root extends File {
   public static readonly instance = new Root();
 
   public name: string = '/';
-  public metadata = 'drw-';
+  public metadata = 'dr--';
   public owner: User = undefined;
 
   public constructor() {
