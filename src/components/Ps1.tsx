@@ -18,7 +18,7 @@ export const Ps1 = (params: { user: User; dir: File }) => {
         {config.ps1_hostname}
       </span>
       <span className="text-light-gray dark:text-dark-gray">
-        :{dir?.getFullPath() ?? '/'}${' '}
+        :{dir?.getPathForUser(user) ?? '/'}${' '}
       </span>
     </div>
   );

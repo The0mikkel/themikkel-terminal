@@ -1,3 +1,4 @@
+import State from './State';
 import User from './User';
 
 /**
@@ -142,6 +143,26 @@ export default abstract class File {
     }
 
     return `${this.name}`;
+  }
+
+  /**
+   * Gets the path, with `~` for the home directory, of the File, if it is located in the home directory of the provided User
+   *
+   * @param user The User to check the home directory of.
+   * @returns The path of the File.
+   */
+  public getPathForUser(user: User | undefined = undefined): string {
+    if (!user) {
+      return this.getFullPath();
+    }
+
+    let path = this.getFullPath();
+
+    if (path.startsWith(user.getHome().getFullPath())) {
+      path = path.replace(user.getHome().getFullPath(), '~');
+    }
+
+    return path;
   }
 
   /**
