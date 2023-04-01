@@ -80,19 +80,6 @@ export const whoami = async (args: string[]): Promise<string> => {
   return `${config.ps1_username}`;
 };
 
-export const ls = async (args: string[]): Promise<string> => {
-  return `a
-bunch
-of
-fake
-directories`;
-};
-
-export const cd = async (args: string[]): Promise<string> => {
-  return `unfortunately, i cannot afford more directories.
-if you want to help, you can visit my website by typing 'website'.`;
-};
-
 export const date = async (args: string[]): Promise<string> => {
   return new Date().toString();
 };
@@ -120,6 +107,7 @@ export const sudo = async (args?: string[]): Promise<string> => {
 
 // Banner
 export const banner = (args?: string[]): string => {
+  return "start";
   return `
 
     ████████╗██╗  ██╗███████╗    ███╗   ███╗██╗██╗  ██╗██╗  ██╗███████╗██╗         ████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗ ██╗     

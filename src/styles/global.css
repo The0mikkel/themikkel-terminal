@@ -39,3 +39,11 @@ div#__next > div {
 ::-webkit-scrollbar-thumb:hover {
   background: #ff8037;
 }
+
+table tr td {
+  padding-right: 0.75rem;
+}
+
+table {
+  table-layout:fixed
+}

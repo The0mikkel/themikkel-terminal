@@ -3,6 +3,7 @@ import { commandExists } from '../utils/commandExists';
 import { shell } from '../utils/shell';
 import { handleTabCompletion } from '../utils/tabCompletion';
 import { Ps1 } from './Ps1';
+import State from '../utils/structure/State';
 
 export const Input = ({
   inputRef,
@@ -42,6 +43,7 @@ export const Input = ({
       setLastCommandIndex(0);
       await shell(command, setHistory, clearHistory, setCommand);
       containerRef.current.scrollTo(0, containerRef.current.scrollHeight);
+      State.instance.changeDir();
     }
 
     if (event.key === 'ArrowUp') {
@@ -81,7 +83,7 @@ export const Input = ({
   return (
     <div className="flex flex-row space-x-2">
       <label htmlFor="prompt" className="flex-shrink">
-        <Ps1 />
+        <Ps1 user={State.instance.user} dir={State.instance.dir} />
       </label>
 
       <input
