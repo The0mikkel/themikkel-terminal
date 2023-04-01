@@ -81,14 +81,24 @@ export const generateLongListPrint = async (paths: File[]): Promise<string> => {
     let current = paths[index];
 
     let children = current.getChildren();
-
     let childList = `total ${children.length}\n<table>`;
+
+    childList += `<tr><td>${current.metadata}</td><td>${current.size}</td><td>${
+      current.owner?.username ?? '-'
+    }</td><td>./</td></tr>`;
+    let parent = current.getParent();
+    if (parent) {
+      childList += `<tr><td>${parent.metadata}</td><td>${parent.size}</td><td>${
+        parent.owner?.username ?? '-'
+      }</td><td>../</td></tr>`;
+    }
+
     children.forEach((child) => {
       let metadata = child.metadata;
-      let owner = child.owner?.username ?? '0';
+      let owner = child.owner?.username ?? '-';
       let size = child.size;
       let name = child.name;
-      childList += `<tr><td>${metadata}</td><td>${owner}</td><td>${size}</td><td>${name}</td></tr>`;
+      childList += `<tr><td>${metadata}</td><td>${size}</td><td>${owner}</td><td>${name}</td></tr>`;
     });
     childList += '</table>';
 
