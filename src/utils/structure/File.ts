@@ -33,11 +33,12 @@ export default abstract class File {
   /**
    * The metadata of the File.
    *
-   * The metadata is a string of 4 characters.
-   * The first character is the type of the File.
-   * The second character is the read permission.
-   * The third character is the write permission.
-   * The fourth character is the execute permission.
+   * The metadata is a string of 10 characters.
+   * This string is split into 4 parts:
+   * - First part (1 character) determines the file type
+   * - Second part (3 characters) determines the permission for thr owner of the file.
+   * - Third part (3 characters) determines the permission for the group owning the file.
+   * - Fourth part (3 characters) determines the permissions for others.
    *
    * The type of the File can be:
    * - d: directory
@@ -48,13 +49,11 @@ export default abstract class File {
    * - w: write
    * - x: execute
    * - -: no permission
+   * permission is always`rwx`. 
+   * Any part that is exchanged with `-`, will result in the permission being revoled for the party it repredents.
    *
    * Example:
-   * - drwx: directory with read, write and execute permissions.
-   * - -rw-: file with read and write permissions.
-   * - --wx: file with write and execute permissions.
-   * - ---x: file with execute permission.
-   * - ----: file with no permissions.
+   * - drwxrwxrwx: directory with read, write and execute permissions for every part.
    */
   public abstract metadata: string;
   /**
